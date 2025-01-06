@@ -2,6 +2,7 @@ const express = require('express');
 const app = express()
 const mongoose = require('mongoose');
 const productRoute = require('./routes/product.route')
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoute);
 
 
-mongoose.connect('mongodb+srv://somotasnim9:VJA02bTbQeB7KHSU@backenddb.o9why.mongodb.net/Node-API?retryWrites=true&w=majority&appName=BackendDB')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("Connected to database!");
 })
